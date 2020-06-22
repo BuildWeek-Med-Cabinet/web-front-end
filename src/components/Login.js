@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { object, string } from "yup";
-import axios from 'axios';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialState = {
   username: "",
@@ -14,7 +14,7 @@ const Login = props => {
   const history = useHistory();
 
   const [credential, setCredential] = useState(initialState);
-  
+
   const schema = object().shape({
     username: string().required("Username is required"),
     password: string().required("Password is required")
@@ -33,7 +33,7 @@ const Login = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    axios
+    axiosWithAuth()
     .post("", credential)
     .then(res => {
       console.log(res);
