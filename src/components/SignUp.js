@@ -51,7 +51,7 @@ const SignUp = props => {
   return (
     <div className='signup-container'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div classNAme='wrapper'>
+        <div className='signup-wrapper'>
           <div className='first-name'>
             <input
               required
