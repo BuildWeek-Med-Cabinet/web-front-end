@@ -48,9 +48,9 @@ const Login = props => {
   return (
     <div className='login-container'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='Wrapper'>
-          <div className='wrapper'>
+        <div className='login-wrapper'>
             <input
+              required
               className='input'
               name="username"
               error={!!errors.username}
@@ -62,6 +62,7 @@ const Login = props => {
           </div>
           <div className='password'>
             <input
+              required
               name="password"
               error={!!errors.password}
               inputRef={register}
@@ -73,7 +74,6 @@ const Login = props => {
           <div className='btn'>
             <button type='submit'>Submit</button>
           </div>
-        </div>
       </form>
     </div>
   );
