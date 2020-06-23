@@ -16,6 +16,7 @@ const PreferenceForm = (props) => {
     props.setPrefs(req);
     push("");
   };
+
   return (
     <div>
       <h2>Preferences</h2>
@@ -23,7 +24,7 @@ const PreferenceForm = (props) => {
         <div>
           <div>
             <h2>Flavors</h2>
-            <h3>Choose up to the number we get from DS and ML Model</h3>
+            <h3>Please select up to 5</h3>
             <div>
               {flavor.map((item, index) => {
                 return (
@@ -39,7 +40,7 @@ const PreferenceForm = (props) => {
               })}
             </div>
             <h2>Effects</h2>
-            <h3>Choose up to the number we get from DS and ML Model</h3>
+            <h3>Please select up to 5</h3>
             <div className="effects">
               {effect.map((item, index) => (
                 <div>
