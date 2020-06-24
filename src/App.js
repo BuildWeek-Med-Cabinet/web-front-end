@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import LoginPage from './components/LoginPage';
 import PrivateRoute from "./components/PrivateRoute";
 import PreferenceForm from "./components/PrefernecePage/index";
 
@@ -9,9 +8,9 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
+        <Route exact path="/" component={LoginPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={LoginPage} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>
     </div>
