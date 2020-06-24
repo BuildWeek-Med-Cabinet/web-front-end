@@ -1,11 +1,11 @@
-import { user, signup, settings } from "../actions";
+import { user, settings } from "../actions";
 const {
   FETCH_USER_START,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
   SET_ID,
 } = user;
-const { SET_PREFS_SUCCESS } = signup;
+
 const { UPDATE_INFO_SUCCESS } = settings;
 const initialState = {
   isFetching: false,
@@ -41,11 +41,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         id: action.payload,
-      };
-    case SET_PREFS_SUCCESS:
-      return {
-        ...state,
-        recommendations: action.payload,
       };
     default:
       return state;
