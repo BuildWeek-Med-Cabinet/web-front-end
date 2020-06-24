@@ -1,13 +1,12 @@
 import axios from "axios";
 
 export const axiosWithAuth = () => {
-
   const token = window.localStorage.getItem("token");
 
   return axios.create({
     headers: {
-      authorization: token
+      authorization: token,
     },
-    baseURL: ""
+    baseURL: "https://med-cabinet-build-week.herokuapp.com/",
   });
 };

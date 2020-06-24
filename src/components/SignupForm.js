@@ -16,45 +16,42 @@ const initialFormErrors = {
   password: "",
 };
 
-export default function LoginForm() {
-  
-    const [formValues, setFormValues] = useState(initialFormValues);
-    const [formErrors, setFormErrors] = useState(initialFormErrors);
-    const [disabled, setDisabled] = useState(false);
+export default function SignupForm() {
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(false);
 
-    const history = useHistory();
+  const history = useHistory();
 
-    const postSignup = (newUser) => {
-        axiosWithAuth().post('https://med-cabinet-build-week.herokuapp.com/api/auth/register', newUser)
-            .then(res => {
-                window.localStorage.setItem("token", res.data.payload);
-                history.push("/");
-            })
-            .catch(err => {
-                console.log('Error')
-            })
-    }
+  const postSignup = (newUser) => {
+    axiosWithAuth()
+      .post(
+        "https://med-cabinet-build-week.herokuapp.com/api/auth/register",
+        newUser
+      )
+      .then((res) => {
+        window.localStorage.setItem("token", res.data.payload);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+  };
 
-    const onInputChange = evt => {
-        const { name, value } = evt.target
-        Yup
-            .reach(signupFormSchema, name)
-            .validate(value)
-            .then(() => {
-                setFormErrors({
-                    ...formErrors,
-                    [name]: ''
-                })
-            })
-            .catch((err) => {
-                setFormErrors({
-                    ...formErrors,
-                    [name]: err.errors[0]
-                })
-            })
-        setFormValues({
-            ...formValues,
-            [name]: value
+  useEffect(() => {
+    signupFormSchema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
+
+  const onInputChange = (evt) => {
+    const { name, value } = evt.target;
+    Yup.reach(signupFormSchema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: "",
         });
       })
       .catch((err) => {
@@ -80,12 +77,6 @@ export default function LoginForm() {
 
     postSignup(newUser);
   };
-
-  useEffect(() => {
-    signupFormSchema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
-    });
-  }, [formValues]);
 
   return (
     <div>
@@ -138,7 +129,7 @@ export default function LoginForm() {
               style={{ padding: "5px 10px", margin: "10px 50%" }}
               disabled={disabled}
             >
-              submit
+              Submit
             </button>
           </div>
         </div>
