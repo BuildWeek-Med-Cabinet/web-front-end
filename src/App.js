@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PreferenceForm from "./components/PrefernecePage/index";
 import { settings } from "./components/store/actions";
 import { connect } from "react-redux";
+import CannabisStrains from './components/PrefernecePage/CannabisStrains'
 
 function App(props) {
   return (
@@ -13,6 +14,7 @@ function App(props) {
         <Route exact path="/" component={LoginPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={LoginPage} />
+        <Route path="/strains" component={() => <CannabisStrains />} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>
     </div>
