@@ -25,7 +25,7 @@ export default function LoginForm() {
     const history = useHistory();
 
     const postSignup = (newUser) => {
-        axiosWithAuth().post('', newUser)
+        axiosWithAuth().post('https://med-cabinet-build-week.herokuapp.com/api/auth/register', newUser)
             .then(res => {
                 window.localStorage.setItem("token", res.data.payload);
                 history.push("/");
