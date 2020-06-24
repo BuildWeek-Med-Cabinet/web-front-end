@@ -1,8 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+import { signup } from "../store/actions";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import flavor from "./flavor";
-import effect from "./effect";
+import Flavor from "./flavor";
+import Effect from "./effect";
 
 const PreferenceForm = (props) => {
   const { push } = useHistory();
@@ -25,34 +27,9 @@ const PreferenceForm = (props) => {
           <div>
             <h2>Flavors</h2>
             <h3>Please select up to 5</h3>
-            <div>
-              {flavor.map((item, index) => {
-                return (
-                  <div className="flavors">
-                    <Flavor
-                      key={index}
-                      flavor={item}
-                      checked={props.flavors.includes(item) ? true : false}
-                      checkHandler={props.toggleFlavor}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+
             <h2>Effects</h2>
             <h3>Please select up to 5</h3>
-            <div className="effects">
-              {effect.map((item, index) => (
-                <div>
-                  <Effect
-                    key={index}
-                    effect={item}
-                    checked={props.effects.includes(item) ? true : false}
-                    checkHandler={props.toggleEffect}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
         <div>
@@ -63,4 +40,18 @@ const PreferenceForm = (props) => {
   );
 };
 
-export default PreferenceForm;
+const mapStateToProps = (state) => {
+  const p = state.signup;
+  return {
+    flavors: p.flavors,
+    effects: p.effects,
+    errors: p.errors,
+    id: state.user.id,
+  };
+};
+
+export default connect(mapStateToProps, {
+  toggleFlavor: signup.toggleFlavor,
+  toggleEffect: signup.toggleEffect,
+  setPrefs: signup.setPrefs,
+})(PreferenceForm);

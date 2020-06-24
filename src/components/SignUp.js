@@ -52,6 +52,7 @@ const SignUp = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="signup-wrapper">
           <div className="first-name">
+            <h3>First Name</h3>
             <input
               required
               name="first_name"
@@ -63,6 +64,7 @@ const SignUp = (props) => {
             <span>{errors.first_name ? errors.first_name.message : ""}</span>
           </div>
           <div className="last-name">
+            <h3>Last Name</h3>
             <input
               required
               name="last_name"
@@ -74,6 +76,7 @@ const SignUp = (props) => {
           </div>
           <span>{errors.last_name ? errors.last_name.message : ""}</span>
           <div className="username">
+            <h3>Username</h3>
             <input
               required
               name="username"
@@ -85,6 +88,7 @@ const SignUp = (props) => {
             <span>{errors.username ? errors.username.message : ""}</span>
           </div>
           <div className="password">
+            <h3>Signup</h3>
             <input
               required
               name="password"
