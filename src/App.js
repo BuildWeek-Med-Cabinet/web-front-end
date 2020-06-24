@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
-import LoginPage from './components/LoginPage';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
 import PreferenceForm from "./components/PrefernecePage/index";
 import { settings } from "./components/store/actions";
