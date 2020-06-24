@@ -1,5 +1,4 @@
 import React from "react";
-import EffectContext from "../../contexts/index";
 
 const Effect = (props) => {
   const { effect, checked, checkHandler } = props;

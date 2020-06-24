@@ -1,5 +1,4 @@
 import React from "react";
-import FlavorContext from "../../contexts/index";
 
 const Flavor = (props) => {
   const { flavor, checked, checkHandler } = props;

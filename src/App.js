@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import LoginPage from './components/LoginPage';
 import PrivateRoute from "./components/PrivateRoute";
 import PreferenceForm from "./components/PrefernecePage/index";
+import { settings } from "./components/store/actions";
+import { connect } from "react-redux";
 
-function App() {
+function App(props) {
   return (
     <div>
       <Switch>
@@ -17,4 +19,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    id: state.user.id,
+  };
+};
+
+export default connect(mapStateToProps, {
+  logout: settings.signOut,
+})(App);
