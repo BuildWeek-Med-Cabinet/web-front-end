@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signup } from "../store/actions";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Flavor from "./flavor";
@@ -21,7 +20,7 @@ const PreferenceForm = (props) => {
 
   return (
     <div>
-      <h2>Preferences</h2>
+      <h1>Preferences</h1>
       <form onSubmit={submitHandler}>
         <div>
           <div>
@@ -41,17 +40,17 @@ const PreferenceForm = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const p = state.signup;
+  //   const p = state.signup;
   return {
-    flavors: p.flavors,
-    effects: p.effects,
-    errors: p.errors,
-    id: state.user.id,
+    // flavors: p.flavors,
+    // effects: p.effects,
+    // errors: p.errors,
+    // id: state.user.id,
   };
 };
 
 export default connect(mapStateToProps, {
-  toggleFlavor: signup.toggleFlavor,
-  toggleEffect: signup.toggleEffect,
-  setPrefs: signup.setPrefs,
+  //   toggleFlavor: signup.toggleFlavor,
+  //   toggleEffect: signup.toggleEffect,
+  //   setPrefs: signup.setPrefs,
 })(PreferenceForm);
