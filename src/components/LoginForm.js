@@ -23,7 +23,7 @@ export default function LoginForm() {
 
     const postLogin = (credentials) => {
         axiosWithAuth()
-            .post("", credentials)
+            .post('https://med-cabinet-build-week.herokuapp.com/api/auth/login', credentials)
             .then(res => {
                 window.localStorage.setItem("token", res.data.payload);
                 history.push("/");

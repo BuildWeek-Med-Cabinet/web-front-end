@@ -17,32 +17,44 @@ const initialFormErrors = {
 };
 
 export default function LoginForm() {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(false);
+  
+    const [formValues, setFormValues] = useState(initialFormValues);
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
+    const [disabled, setDisabled] = useState(false);
 
-  const history = useHistory();
+    const history = useHistory();
 
-  const postSignup = (newUser) => {
-    axiosWithAuth()
-      .post("", newUser)
-      .then((res) => {
-        window.localStorage.setItem("token", res.data.payload);
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log("Error");
-      });
-  };
+    const postSignup = (newUser) => {
+        axiosWithAuth().post('https://med-cabinet-build-week.herokuapp.com/api/auth/register', newUser)
+            .then(res => {
+                window.localStorage.setItem("token", res.data.payload);
+                history.push("/");
+            })
+            .catch(err => {
+                console.log('Error')
+            })
+    }
 
-  const onInputChange = (evt) => {
-    const { name, value } = evt.target;
-    Yup.reach(signupFormSchema, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
+    const onInputChange = evt => {
+        const { name, value } = evt.target
+        Yup
+            .reach(signupFormSchema, name)
+            .validate(value)
+            .then(() => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: ''
+                })
+            })
+            .catch((err) => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: err.errors[0]
+                })
+            })
+        setFormValues({
+            ...formValues,
+            [name]: value
         });
       })
       .catch((err) => {
