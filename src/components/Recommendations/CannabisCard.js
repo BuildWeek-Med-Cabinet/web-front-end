@@ -7,21 +7,23 @@ const Card = styled.div`
     margin: 5px;
     padding: 20px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    border: 1px solid lightgrey;
 `
 const CardContainer = styled.div`
   padding: 10px;
+  width: 100%;
 `
 const Name = styled.div`
-  font-size: 1rem;
+  font-size: 1.75rem;
 `
-const Flavor = styled.div`
+const Flavor = styled.ul`
   font-size: 0.75rem;
+  margin: 0px;
 ` 
-const Effects = styled.div`
+const Effects = styled.ul`
   font-size: 0.75rem;
+  margin: 0px;
 ` 
 
 const CannabisCard = ({ strain }) => {
@@ -29,20 +31,24 @@ const CannabisCard = ({ strain }) => {
     <Card>
       <Name>{strain.name}</Name>
       <CardContainer>
-        <Flavor>Flavors:&nbsp;
+        <label>Flavors
+        <Flavor>
           {strain.flavors.map(flavor => {
             return (
-              <span>{flavor}&nbsp;</span>
+              <li>{flavor}</li>
             )
           })}
-        </Flavor><br />
-        <Effects>Effects:&nbsp; 
+        </Flavor>
+        </label>
+        <label>Effects
+        <Effects>
           {strain.effects.map(effect => {
             return (
-              <span>{effect}&nbsp;</span>
+              <li>{effect}</li>
             )
           })}
         </Effects>
+        </label>
       </CardContainer> 
     </Card>
     );
