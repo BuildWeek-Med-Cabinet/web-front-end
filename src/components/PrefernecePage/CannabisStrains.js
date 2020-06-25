@@ -29,17 +29,17 @@ export default function CannabisStrains({ items, updateItems }) {
   const [strainToEdit, setStrainToEdit] = useState(defaultArray);
 
   useEffect(() => {
-    const getStrains = () => {
-      axiosWithAuth()
-        .get("https://med-cabinet-build-week.herokuapp.com/api/strains")
-        .then((res) => {
-          setStrains(res.data);
-        })
-        .catch((err) => {
-          console.log("Error", err);
-        });
-    };
-    getStrains();
+    // const getStrains = () => {
+    axiosWithAuth()
+      .get("https://med-cabinet-build-week.herokuapp.com/api/strains")
+      .then((res) => {
+        setStrains(res.data);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+    // };
+    // getStrains();
   }, []);
 
   // const editStrains = (strain) => {
