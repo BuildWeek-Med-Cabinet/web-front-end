@@ -1,10 +1,11 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useParams } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import Recommend from "./components/Recommendations";
 import LoginPage from "./components/LoginPage";
 import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from './components/Dashboard';
 import PreferenceForm from "./components/PrefernecePage/index";
 import { connect } from "react-redux";
 import CannabisStrains from "./components/PrefernecePage/CannabisStrains";
@@ -26,6 +27,9 @@ const Nav = styled.nav`
 `;
 
 function App(props) {
+
+  const { id } = useParams();
+  
   return (
     <div>
     <div className='background'></div>
@@ -33,6 +37,7 @@ function App(props) {
         <Link className="logo-link" to="/"><Img src={logo} alt="logo" /></Link>
         <Nav>
           <Link className="links" to="/preferences">Preferences</Link>
+          <Link className="links" to={`/dashboard/${id}`}>Dashboard</Link>
           <Link className="links" to="/strains">Popular Strains</Link>
           <Link className="links" to="/recommend">Recommendations</Link>
         </Nav>
@@ -40,6 +45,7 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route path="/login" component={LoginForm} />
+        <Route path="/dashboard/:id" component={Dashboard} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/strains" component={() => <CannabisStrains />} />
         <PrivateRoute path="/recommend" component={Recommend} />
