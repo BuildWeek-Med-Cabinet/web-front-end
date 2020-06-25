@@ -26,7 +26,28 @@ export default function LoginForm() {
 
   const history = useHistory();
 
-  const postLogin = (credentials) => {
+  // const postLogin = (credentials) => {
+  //   axiosWithAuth()
+  //     .post(
+  //       "https://med-cabinet-build-week.herokuapp.com/api/auth/login",
+  //       credentials
+  //     )
+  //     .then((res) => {
+  //       window.localStorage.setItem("token", res.data.token);
+  //       history.push("/strains");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error");
+  //     });
+  // };
+
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    const credentials = {
+      email: formValues.email,
+      password: formValues.password,
+    };
+    // postLogin(credentials);
     axiosWithAuth()
       .post(
         "https://med-cabinet-build-week.herokuapp.com/api/auth/login",
@@ -63,14 +84,6 @@ export default function LoginForm() {
     });
   };
 
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    const credentials = {
-      email: formValues.email,
-      password: formValues.password,
-    };
-    postLogin(credentials);
-  };
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };

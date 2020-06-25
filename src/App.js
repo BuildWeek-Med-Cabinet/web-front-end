@@ -45,11 +45,11 @@ function App(props) {
         </Nav>
       </Header>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/" component={LoginForm} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
-        <PrivateRoute path="/recommend" component={Recommend} />
         <Route path="/strains" component={() => <CannabisStrains />} />
+        <PrivateRoute path="/recommend" component={Recommend} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>
     </div>

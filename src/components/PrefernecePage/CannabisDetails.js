@@ -1,12 +1,6 @@
 import React from "react";
 
 export default function CannabisDetails({ details }) {
-  // const { details } = props;
-
-  // if (!details) {
-  //     return ('Finding, please wait')
-  // }
-
   return (
     <div className="div-cannabis">
       <h3>{details.strain} </h3>
