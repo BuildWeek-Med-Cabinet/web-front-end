@@ -47,26 +47,30 @@ const Dashboard = (props) => {
 
     return (
         <div className='update-container'>
-            <form onSubmit={onSubmit}>
-                <input 
+            <form className='update-form' onSubmit={onSubmit}>
+                <h6 className='update'>Update User</h6>
+                <input
+                    className='update-input' 
                     type='text'
                     name='username'
                     placeholder='username'
                     onChange={onChange}
                 />
-                <input 
+                <input
+                    className='update-input' 
                     type='email'
                     name='email'
                     placeholder='email'
                     onChange={onChange}
                 />
-                <input 
+                <input
+                    className='update-input' 
                     type='password'
                     name='password'
                     placeholder='password'
                     onChange={onChange}
                 />
-                <button>Submit</button>
+                <button className='update-button'>Submit</button>
             </form>         
         </div>
     );
