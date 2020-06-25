@@ -1,14 +1,15 @@
 import React, {useState,useEffect} from "react";
 import CannabisDetails from "./CannabisDetails";
-import { dummyStrains } from "./data/dummyData";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { dummyStrains } from "../../data/dummyData";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-export default function CannabisStrains({ strains }) {
+export default function CannabisStrains() {
 const [strains, setStrains] = useState(dummyStrains);
 
 useEffect(() => {
     const getStrains = () => {
-      axiosWithAuth().get('https://med-cabinet-build-week.herokuapp.com/api/strains')
+      axiosWithAuth()
+      .get('https://med-cabinet-build-week.herokuapp.com/api/strains')
         .then(res => {
           setStrains(res.data)
         })
