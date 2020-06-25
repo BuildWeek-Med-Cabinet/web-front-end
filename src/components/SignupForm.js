@@ -23,20 +23,17 @@ export default function SignupForm() {
 
   const history = useHistory();
 
-  const postSignup = (newUser) => {
-    axiosWithAuth()
-      .post(
-        "https://med-cabinet-build-week.herokuapp.com/api/auth/register",
-        newUser
-      )
-      .then((res) => {
-        window.localStorage.setItem("token", res.data.token);
-        history.push("/login");
-      })
-      .catch((err) => {
-        console.log("Error");
-      });
-  };
+  // const postSignup = (newUser) => {
+  //   axiosWithAuth()
+  //     .post("https://med-cabinet-build-week.herokuapp.com/api/auth/register", newUser)
+  //     .then((res) => {
+  //       window.localStorage.setItem("token", res.data.token);
+  //       history.push("/");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error");
+  //     });
+  // };
 
   useEffect(() => {
     signupFormSchema.isValid(formValues).then((valid) => {
@@ -74,8 +71,16 @@ export default function SignupForm() {
       email: formValues.email,
       password: formValues.password,
     };
-
-    postSignup(newUser);
+      axiosWithAuth()
+      .post("https://med-cabinet-build-week.herokuapp.com/api/auth/register", newUser)
+      .then((res) => {
+        window.localStorage.setItem("token", res.data.token);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+    // postSignup(newUser);
   };
 
   return (

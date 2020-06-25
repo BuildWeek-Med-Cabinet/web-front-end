@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
 import CannabisDetails from "./CannabisDetails";
 import { axiosWithAuth } from "../../utils";
+import styled from 'styled-components';
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Title = styled.div`
+  font-size: 2rem;
+  color: white;
+`
 
 const defaultArray = [
   {
@@ -38,7 +49,10 @@ export default function CannabisStrains({ item }) {
 
   return (
     <div>
-      <div>
+      <TitleContainer>
+        <Title>Here are some popular choices!</Title>
+      </TitleContainer>
+      <div className='strains-container'>
         {strains.map((x) => {
           return (
             <div>
