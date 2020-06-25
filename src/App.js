@@ -16,7 +16,7 @@ const Header = styled.header`
   background-color: #1c6758;
 `
 const Img = styled.img`
-  width: 45%;
+  width: 40%;
 `
 const Nav = styled.nav`
   display: flex;
@@ -31,9 +31,9 @@ function App(props) {
     <Header>
       <Link className='logo-link' to='/'><Img src={logo} alt='logo' /></Link>
       <Nav>
-        <Link className='links' to='/recommend'>Recommendations</Link>
         <Link className='links' to='/preferences'>Preferences</Link>
-        <Link className='links' to='/strains'>Strains</Link>
+        <Link className='links' to='/strains'>Popular Strains</Link>
+        <Link className='links' to='/recommend'>Recommendations</Link>
       </Nav>
     </Header>
       <Switch>

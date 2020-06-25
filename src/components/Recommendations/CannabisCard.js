@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const Card = styled.div`
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    width: 30%;
+    width: 248px;
     margin: 5px;
-    padding: 20px;
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     border: 1px solid lightgrey;
@@ -15,7 +15,9 @@ const CardContainer = styled.div`
   width: 100%;
 `
 const Name = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  padding-bottom: 2px;
+  border-bottom: 1px solid lightgrey;
 `
 const Flavor = styled.ul`
   font-size: 0.75rem;
