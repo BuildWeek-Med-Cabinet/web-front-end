@@ -5,7 +5,7 @@ import LoginPage from "./components/LoginPage";
 import Recommend from "./components/Recommendations";
 import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
-import Dashboard from './components/Dashboard';
+import Dashboard from "./components/Dashboard";
 import PreferenceForm from "./components/PrefernecePage/index";
 import { connect } from "react-redux";
 import CannabisStrains from "./components/PrefernecePage/CannabisStrains";
@@ -18,7 +18,7 @@ const Header = styled.header`
 `;
 const Img = styled.img`
   width: 40%;
-`
+`;
 
 const Nav = styled.nav`
   display: flex;
@@ -28,19 +28,28 @@ const Nav = styled.nav`
 `;
 
 function App(props) {
-
   const { id } = useParams();
-  
+
   return (
     <div>
-    <div className='background'></div>
+      <div className="background"></div>
       <Header>
-        <Link className="logo-link" to="/"><Img src={logo} alt="logo" /></Link>
+        <Link className="logo-link" to="/">
+          <Img src={logo} alt="logo" />
+        </Link>
         <Nav>
-          <Link className="links" to="/preferences">Preferences</Link>
-          <Link className="links" to={`/dashboard/${id}`}>Dashboard</Link>
-          <Link className="links" to="/strains">Popular Strains</Link>
-          <Link className="links" to="/recommend">Recommendations</Link>
+          <Link className="links" to="/preferences">
+            Preferences
+          </Link>
+          <Link className="links" to={`/dashboard/${id}`}>
+            Dashboard
+          </Link>
+          <Link className="links" to="/strains">
+            Popular Strains
+          </Link>
+          <Link className="links" to="/recommend">
+            Recommendations
+          </Link>
         </Nav>
       </Header>
       <Switch>
@@ -48,7 +57,7 @@ function App(props) {
         <Route path="/login" component={LoginForm} />
         <Route path="/dashboard/:id" component={Dashboard} />
         <Route path="/signup" component={SignupForm} />
-        <Route path="/strains" component={() => <CannabisStrains />} />
+        <Route path="/strains" component={CannabisStrains} />
         <PrivateRoute path="/recommend" component={Recommend} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>
