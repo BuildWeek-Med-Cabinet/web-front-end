@@ -18,6 +18,9 @@ const Header = styled.header`
 const Img = styled.img`
   width: 45%;
 `;
+
+  width: 40%;
+`
 const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
