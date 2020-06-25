@@ -40,7 +40,7 @@ export default function LoginForm() {
       )
       .then((res) => {
         window.localStorage.setItem("token", res.data.token);
-        history.push("/strains");
+        history.push("/");
       })
       .catch((err) => {
         console.log("Error");
