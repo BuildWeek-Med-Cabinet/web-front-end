@@ -4,17 +4,16 @@ import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
 import PreferenceForm from "./components/PrefernecePage/index";
-import { settings } from "./components/store/actions";
 import { connect } from "react-redux";
-import CannabisStrains from './components/PrefernecePage/CannabisStrains'
+import CannabisStrains from "./components/PrefernecePage/CannabisStrains";
 
 function App(props) {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={LoginPage} />
+        <Route exact path="/" component={LoginForm} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignupForm} />
         <Route path="/strains" component={() => <CannabisStrains />} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>
@@ -28,6 +27,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  logout: settings.signOut,
-})(App);
+export default connect(mapStateToProps, {})(App);
+
+// Logout Button Info
+
+// const logoutHandler = (e) => {
+//   e.preventDefault();
+//   signOut();
+//   history.push("/");
+// };
+
+// Add this to the button
+
+//onClick={logoutHandler}

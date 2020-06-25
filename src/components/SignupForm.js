@@ -27,6 +27,7 @@ export default function SignupForm() {
     axiosWithAuth()
       .post(
         "https://med-cabinet-build-week.herokuapp.com/api/auth/register",
+
         newUser
       )
       .then((res) => {

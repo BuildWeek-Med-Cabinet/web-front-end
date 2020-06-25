@@ -28,7 +28,7 @@ export default function LoginForm() {
         credentials
       )
       .then((res) => {
-        window.localStorage.setItem("token", res.data.payload);
+        window.localStorage.setItem("token", res.data.token);
         history.push("/preferences");
       })
       .catch((err) => {

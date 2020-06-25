@@ -1,32 +1,42 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import CannabisDetails from "./CannabisDetails";
-import { dummyStrains } from "./data/dummyData";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { dummyStrains } from "../../data/dummyData";
+import { axiosWithAuth } from "../../utils";
 
-export default function CannabisStrains({ strains }) {
-const [strains, setStrains] = useState(dummyStrains);
+const defaultArray = [
+  {
+    strain: "",
+    type: "",
+    effect: "",
+    flavor: "",
+    description: "",
+  },
+];
 
-useEffect(() => {
+export default function CannabisStrains({ item }) {
+  const [strains, setStrains] = useState(defaultArray);
+
+  useEffect(() => {
     const getStrains = () => {
-      axiosWithAuth().get('https://med-cabinet-build-week.herokuapp.com/api/strains')
-        .then(res => {
-          setStrains(res.data)
+      axiosWithAuth()
+        .get("https://med-cabinet-build-week.herokuapp.com/api/strains")
+        .then((res) => {
+          setStrains(res.data);
         })
-        .catch(err => {
-          console.log('Error')
-        })
-    }
+        .catch((err) => {
+          console.log("Error");
+        });
+    };
     getStrains();
-  }, [])
+  }, []);
 
-
-    return(
-        <div>
-            {
-              strains.map(x => {
-                  return<CannabisDetails key={x.id} details={x} />
-              })  
-            }
-        </div>
-    )
+  return (
+    <div>
+      <div>
+        {strains.map((x) => {
+          return <CannabisDetails key={x.id} details={x} />;
+        })}
+      </div>
+    </div>
+  );
 }
