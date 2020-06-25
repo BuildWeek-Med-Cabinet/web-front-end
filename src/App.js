@@ -14,10 +14,12 @@ function App(props) {
   return (
     <div>
       <Switch>
+
         <Route exact path="/" component={LoginPage} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/recommend" component={Recommend} />
+
         <Route path="/strains" component={() => <CannabisStrains />} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>

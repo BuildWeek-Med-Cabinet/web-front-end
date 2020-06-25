@@ -20,6 +20,7 @@ export default function CannabisDetails({ details }) {
                 })}
             </p>
             <p>Description:&nbsp;{details.description}</p>
+
         </div>
     )
 }
