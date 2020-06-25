@@ -4,7 +4,6 @@ export const Div = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #8FFF55;
     font-family: Georgia;
     color: #050709;
     padding: 10px;

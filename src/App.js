@@ -14,10 +14,10 @@ import logo from './img/logo.png'
 
 const Header = styled.header`
   display: flex;
-  background-color: #2c584d;
+  background-color: #1c6758;
 `
 const Img = styled.img`
-  width: 40%;
+  width: 45%;
 `
 const Nav = styled.nav`
   display: flex;
@@ -26,15 +26,15 @@ const Nav = styled.nav`
   width: 100%
 `
 
-
 function App(props) {
   return (
     <div>
     <Header>
-      <Link to='/'><Img src={logo} alt='logo' /></Link>
+      <Link className='logo-link' to='/'><Img src={logo} alt='logo' /></Link>
       <Nav>
         <Link className='links' to='/recommend'>Recommendations</Link>
         <Link className='links' to='/preferences'>Preferences</Link>
+        <Link className='links' to='/strains'>Strains</Link>
       </Nav>
     </Header>
       <Switch>
