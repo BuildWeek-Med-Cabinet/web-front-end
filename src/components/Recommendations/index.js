@@ -7,7 +7,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: strecth;
   flex-wrap: wrap;
 `
 const TitleContainer = styled.div`
@@ -17,6 +17,7 @@ const TitleContainer = styled.div`
 `
 const Title = styled.div`
   font-size: 2rem;
+  color: white;
 `
 const Recommendations = (props) => {
 
@@ -28,9 +29,9 @@ const Recommendations = (props) => {
         <Title>We recommend the following</Title>
       </TitleContainer>
       <Container>
-        {strains.map(strain => {
+        {strains.map(details => {
           return (
-            <CannabisCard strain={strain} />
+            <CannabisCard details={details} />
           )
         })}
       </Container>
