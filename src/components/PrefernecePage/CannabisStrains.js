@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CannabisDetails from "./CannabisDetails";
-import { dummyStrains } from "../../data/dummyData";
 import { axiosWithAuth } from "../../utils";
 
 const defaultArray = [
