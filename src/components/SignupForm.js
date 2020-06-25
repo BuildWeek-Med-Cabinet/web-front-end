@@ -25,13 +25,9 @@ export default function SignupForm() {
 
   const postSignup = (newUser) => {
     axiosWithAuth()
-      .post(
-        "https://med-cabinet-build-week.herokuapp.com/api/auth/register",
-
-        newUser
-      )
+      .post("https://med-cabinet-build-week.herokuapp.com/api/auth/register", newUser)
       .then((res) => {
-        window.localStorage.setItem("token", res.data.payload);
+        window.localStorage.setItem("token", res.data.token);
         history.push("/");
       })
       .catch((err) => {
