@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Link, useParams } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
+import LoginPage from "./components/LoginPage";
 import Recommend from "./components/Recommendations";
 import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
