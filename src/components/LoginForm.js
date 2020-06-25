@@ -5,26 +5,42 @@ import { loginFormSchema } from "./formSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+
+const DivFormGroup = styled.div`
+    font-family: Georgia;
+    color: #050709;
+    padding: 0 10px;
+`
+
+const DivLabel = styled.div`
+    margin: 20px 0;
+`
+const DivButton = styled.div`
+    backgoundColor: "green",
+    padding: "5px 10px",
+    margin: "10px 50%"
+`
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const initialFormValues = {
-  email: "",
-  password: "",
+    email: "",
+    password: "",
 };
 
 const initialFormErrors = {
-  email: "",
-  password: "",
+    email: "",
+    password: "",
 };
 
 export default function LoginForm() {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(false);
-  const [passwordShown, setPasswordShown] = useState(false);
+    const [formValues, setFormValues] = useState(initialFormValues);
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
+    const [disabled, setDisabled] = useState(false);
+    const [passwordShown, setPasswordShown] = useState(false);
 
-  const history = useHistory();
+    const history = useHistory();
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -47,85 +63,78 @@ export default function LoginForm() {
       });
   };
 
-  const onInputChange = (evt) => {
-    const { name, value } = evt.target;
-    Yup.reach(loginFormSchema, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
+    const onInputChange = (evt) => {
+        const { name, value } = evt.target;
+        Yup.reach(loginFormSchema, name)
+            .validate(value)
+            .then(() => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: "",
+                });
+            })
+            .catch((err) => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: err.errors[0],
+                });
+            });
+        setFormValues({
+            ...formValues,
+            [name]: value,
         });
-      })
-      .catch((err) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0],
+    };
+
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
+
+    useEffect(() => {
+        loginFormSchema.isValid(formValues).then((valid) => {
+            setDisabled(!valid);
+            //console.log('valid:' + valid);
         });
-      });
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+    }, [formValues]);
 
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
+    return (
+        <div>
+            <form className="form container" onSubmit={onSubmit}>
+                <div className="errors">
+                    <div>{formErrors.email}</div>
+                    <div>{formErrors.password}</div>
+                </div>
 
-  useEffect(() => {
-    loginFormSchema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
-      //console.log('valid:' + valid);
-    });
-  }, [formValues]);
-
-  return (
-    <div>
-      <form className="form container" onSubmit={onSubmit}>
-        <div className="errors">
-          <div>{formErrors.email}</div>
-          <div>{formErrors.password}</div>
+                <DivFormGroup>
+                    <DivLabel>
+                        <label>
+                            Email:&nbsp;
+                            <input
+                                value={formValues.email}
+                                onChange={onInputChange}
+                                name="email"
+                                type="text"
+                            />
+                        </label>
+                    </DivLabel>
+                    <DivLabel>
+                        <label>
+                            Password:&nbsp;
+                            <input
+                                value={formValues.password}
+                                onChange={onInputChange}
+                                name="password"
+                                type={passwordShown ? "text" : "password"}
+                            />
+                            <i onClick={togglePasswordVisiblity}>{eye}</i>
+                        </label>
+                    </DivLabel>
+                    <DivButton>
+                        <button disabled={disabled} >
+                            Submit
+                        </button>
+                    </DivButton>
+                </DivFormGroup>
+            </form>
         </div>
-
-        <div className="form-group inputs">
-          <div style={{ margin: "20px 0" }}>
-            <label>
-              Email:&nbsp;
-              <input
-                value={formValues.email}
-                onChange={onInputChange}
-                name="email"
-                type="text"
-              />
-            </label>
-          </div>
-          <div style={{ margin: "20px 0" }}>
-            <label>
-              Password:&nbsp;
-              <input
-                value={formValues.password}
-                onChange={onInputChange}
-                name="password"
-                type={passwordShown ? "text" : "password"}
-              />
-              <i onClick={togglePasswordVisiblity}>{eye}</i>
-            </label>
-          </div>
-          <div>
-            <button
-              style={{
-                backgoundColor: "green",
-                padding: "5px 10px",
-                margin: "10px 50%",
-              }}
-              disabled={disabled}
-            >
-              submit
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
+    );
 }

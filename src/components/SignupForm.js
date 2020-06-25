@@ -3,6 +3,16 @@ import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { signupFormSchema } from "./formSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import styled from "styled-components";
+
+const DivLabel = styled.div`
+    margin: 20px 0;
+`
+const DivButton = styled.div`
+    backgoundColor: "green",
+    padding: "5px 10px",
+    margin: "10px 50%"
+`
 
 const initialFormValues = {
   username: "",
@@ -71,7 +81,7 @@ export default function SignupForm() {
       email: formValues.email,
       password: formValues.password,
     };
-      axiosWithAuth()
+    axiosWithAuth()
       .post("https://med-cabinet-build-week.herokuapp.com/api/auth/register", newUser)
       .then((res) => {
         window.localStorage.setItem("token", res.data.token);
@@ -93,50 +103,44 @@ export default function SignupForm() {
         </div>
 
         <div className="form-group inputs">
-          <div style={{ margin: "20px 0", padding: "0px" }}>
+          <DivLabel>
             <label>
               Username&nbsp;
               <input
-                style={{ margin: "0", padding: "0px" }}
                 value={formValues.username}
                 onChange={onInputChange}
                 name="username"
                 type="text"
               />
             </label>
-          </div>
-          <div style={{ margin: "20px 0", padding: "0px" }}>
-            <label style={{ margin: "0", padding: "0px" }}>
+          </DivLabel>
+          <DivLabel>
+            <label>
               Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
-                style={{ margin: "0" }}
                 value={formValues.email}
                 onChange={onInputChange}
                 name="email"
                 type="email"
               />
             </label>
-          </div>
-          <div style={{ margin: "20px 0" }}>
-            <label style={{ margin: "0" }}>
+          </DivLabel>
+          <DivLabel>
+            <label>
               Password&nbsp;
               <input
-                style={{ margin: "0" }}
                 value={formValues.password}
                 onChange={onInputChange}
                 name="password"
                 type="password"
               />
             </label>
-          </div>
-          <div>
-            <button
-              style={{ padding: "5px 10px", margin: "10px 50%" }}
-              disabled={disabled}
-            >
+          </DivLabel>
+          <DivButton>
+            <button disabled={disabled} >
               Submit
             </button>
-          </div>
+          </DivButton>
         </div>
       </form>
     </div>

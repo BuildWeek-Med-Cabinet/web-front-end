@@ -38,18 +38,18 @@ const CannabisCard = ({ details }) => {
       <CardContainer>
         <label>Flavors
         <Flavor>
-          {details.flavors.map(flavor => {
+          {details.flavors.map((flavor,i) => {
             return (
-              <li>{flavor}</li>
+              <li key={i}>{flavor}</li>
             )
           })}
         </Flavor>
         </label>
         <label>Effects
         <Effects>
-          {details.effects.map(effect => {
+          {details.effects.map((effect,i) => {
             return (
-              <li>{effect}</li>
+              <li key={i}>{effect}</li>
             )
           })}
         </Effects>
