@@ -5,7 +5,7 @@ export const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
-      authorization: token,
+      authorization: 'Bearer ' + token,
     },
     baseURL: "https://med-cabinet-build-week.herokuapp.com/",
   });

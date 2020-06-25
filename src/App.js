@@ -12,9 +12,9 @@ function App(props) {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={LoginPage} />
+        <Route exact path="/" component={LoginForm} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignupForm} />
         <Route path="/strains" component={() => <CannabisStrains />} />
         <PrivateRoute path="/preferences" component={PreferenceForm} />
       </Switch>
