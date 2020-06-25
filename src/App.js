@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route, Link, useParams } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import Recommend from "./components/Recommendations";
-import LoginPage from "./components/LoginPage";
 import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from './components/Dashboard';
@@ -19,6 +18,7 @@ const Header = styled.header`
 const Img = styled.img`
   width: 40%;
 `
+
 const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
@@ -62,15 +62,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {})(App);
-
-// Logout Button Info
-
-// const logoutHandler = (e) => {
-//   e.preventDefault();
-//   signOut();
-//   history.push("/");
-// };
-
-// Add this to the button
-
-//onClick={logoutHandler}

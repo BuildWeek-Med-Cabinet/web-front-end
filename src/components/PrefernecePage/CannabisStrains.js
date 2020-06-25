@@ -34,11 +34,18 @@ export default function CannabisStrains({ item }) {
           setStrains(res.data);
         })
         .catch((err) => {
-          console.log("Error");
+          console.log("Error", err);
         });
     };
     getStrains();
   }, []);
+
+  const deleteStrain = (id) => {
+    axiosWithAuth()
+      .delete(`https://med-cabinet-build-week.herokuapp.com/api/strains/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -47,7 +54,14 @@ export default function CannabisStrains({ item }) {
       </TitleContainer>
       <div className='strains-container'>
         {strains.map((x) => {
-          return <CannabisDetails key={x.id} details={x} />;
+          return (
+            <div>
+              <CannabisDetails key={x.id} details={x} />
+              <button onClick={() => deleteStrain(x.id)}>
+                Delete this strain?
+              </button>
+            </div>
+          );
         })}
       </div>
     </div>
