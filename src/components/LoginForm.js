@@ -26,21 +26,6 @@ export default function LoginForm() {
 
   const history = useHistory();
 
-  // const postLogin = (credentials) => {
-  //   axiosWithAuth()
-  //     .post(
-  //       "https://med-cabinet-build-week.herokuapp.com/api/auth/login",
-  //       credentials
-  //     )
-  //     .then((res) => {
-  //       window.localStorage.setItem("token", res.data.token);
-  //       history.push("/strains");
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error");
-  //     });
-  // };
-
   const onSubmit = (evt) => {
     evt.preventDefault();
     const credentials = {

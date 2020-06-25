@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import Recommend from "./components/Recommendations";
-import LoginPage from "./components/LoginPage";
 import SignupForm from "./components/SignupForm";
 import PrivateRoute from "./components/PrivateRoute";
 import PreferenceForm from "./components/PrefernecePage/index";
@@ -19,8 +18,6 @@ const Img = styled.img`
   width: 45%;
 `;
 
-  width: 40%;
-`
 const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
@@ -39,9 +36,9 @@ function App(props) {
           <Link className="links" to="/recommend">
             Recommendations
           </Link>
-          <Link className="links" to="/preferences">
+          <a className="links" href="https://themedicinals.herokuapp.com/">
             Preferences
-          </Link>
+          </a>
           <Link className="links" to="/strains">
             Strains
           </Link>
@@ -66,15 +63,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {})(App);
-
-// Logout Button Info
-
-// const logoutHandler = (e) => {
-//   e.preventDefault();
-//   signOut();
-//   history.push("/");
-// };
-
-// Add this to the button
-
-//onClick={logoutHandler}
