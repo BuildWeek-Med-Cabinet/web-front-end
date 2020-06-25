@@ -36,7 +36,7 @@ const Login = (props) => {
       .post("", credential)
       .then((res) => {
         console.log(res);
-        window.localStorage.setItem("token", res.data.payload);
+        window.localStorage.setItem("token", res.data.token);
         history.push("/");
       })
       .catch((err) => {
