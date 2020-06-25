@@ -1,27 +1,25 @@
 import React from "react";
 
 export default function CannabisDetails({ details }) {
+  // const { details } = props;
 
-    return(
-        <div className='div-cannabis'>
-            <h1>{details.name} </h1>
-            <p>Flavors:&nbsp;
-                {details.flavors.map(flavor => {
-                    return (
-                    <span>{flavor},&nbsp;</span>
-                    )
-                })}
-            </p>
-            <p>Effect:&nbsp;
-                {details.effects.map(effect => {
-                return (
-                    <span>{effect},&nbsp;</span>
-                )
-                })}
-            </p>
-            <p>Description:&nbsp;{details.description}</p>
+  // if (!details) {
+  //     return ('Finding, please wait')
+  // }
 
-        </div>
-    )
+  return (
+    <div className="div-cannabis">
+      <h3>{details.strain} </h3>
+      <p>Type:{details.type}</p>
+      <p>Flavor:{details.flavor}</p>
+      <p>Effect:{details.effect}</p>
+      <p>Description:{details.description}</p>
+    </div>
+  );
 }
-   
+
+// strain:
+// type:
+// effect:
+// flavor:
+// description:

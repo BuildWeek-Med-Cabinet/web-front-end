@@ -27,21 +27,20 @@ export default function LoginForm() {
 
     const history = useHistory();
 
-    const postLogin = (credentials) => {
-        axiosWithAuth()
-            .post(
-                "https://med-cabinet-build-week.herokuapp.com/api/auth/login",
-                credentials
-            )
-            .then((res) => {
-                window.localStorage.setItem("token", res.data.token);
-                console.log("token saved is:" + res.data.token);
-                history.push("/preferences");
-            })
-            .catch((err) => {
-                console.log("Error");
-            });
-    };
+  const postLogin = (credentials) => {
+    axiosWithAuth()
+      .post(
+        "https://med-cabinet-build-week.herokuapp.com/api/auth/login",
+        credentials
+      )
+      .then((res) => {
+        window.localStorage.setItem("token", res.data.token);
+        history.push("/preferences");
+      })
+      .catch((err) => {
+        console.log("Error");
+      });
+  };
 
     const onInputChange = (evt) => {
         const { name, value } = evt.target;

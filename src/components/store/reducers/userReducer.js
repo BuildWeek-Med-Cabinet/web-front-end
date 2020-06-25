@@ -1,4 +1,4 @@
-import { user, settings } from "../actions";
+import { user } from "../actions";
 const {
   FETCH_USER_START,
   FETCH_USER_SUCCESS,
@@ -6,7 +6,6 @@ const {
   SET_ID,
 } = user;
 
-const { UPDATE_INFO_SUCCESS } = settings;
 const initialState = {
   isFetching: false,
   id: null,
@@ -16,12 +15,6 @@ const initialState = {
 };
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_INFO_SUCCESS:
-      return {
-        ...state,
-        username: action.payload.username,
-        email: action.payload.email,
-      };
     case FETCH_USER_START:
       return {
         ...state,
