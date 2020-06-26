@@ -13,15 +13,7 @@ const Title = styled.div`
   color: white;
 `;
 
-const defaultArray = [
-  // {
-  //   strain: "",
-  //   type: "",
-  //   effect: "",
-  //   flavor: "",
-  //   description: "",
-  // },
-];
+const defaultArray = [];
 
 export default function CannabisStrains({ items, updateItems }) {
   const [strains, setStrains] = useState(defaultArray);
@@ -29,7 +21,6 @@ export default function CannabisStrains({ items, updateItems }) {
   const [strainToEdit, setStrainToEdit] = useState(defaultArray);
 
   useEffect(() => {
-    // const getStrains = () => {
     axiosWithAuth()
       .get("https://med-cabinet-build-week.herokuapp.com/api/strains")
       .then((res) => {
@@ -46,8 +37,6 @@ export default function CannabisStrains({ items, updateItems }) {
       .catch((err) => {
         console.log("Error", err);
       });
-    // };
-    // getStrains();
   }, []);
 
   // const editStrains = (strain) => {
