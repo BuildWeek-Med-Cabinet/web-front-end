@@ -5,36 +5,35 @@ import { signupFormSchema } from "./formSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import styled from "styled-components";
 
-
 const DivFormGroup = styled.div`
-    width: 30%;
-    margin: 200px 35% 0;
-    padding: 0 10px;
-    border: 1px solid #173d53;
-    background-color: #25b3a7;
-    color: #173d53;
-    border-radius: 5px;
-`
+  width: 30%;
+  margin: 200px 35% 0;
+  padding: 0 10px;
+  border: 1px solid #173d53;
+  background-color: #25b3a7;
+  color: #173d53;
+  border-radius: 5px;
+`;
 
 const DivLabel = styled.div`
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-`
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+`;
 const DivButton = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    backgoundColor: "green";
-    padding: "20px 10px";
-    margin: "0px auto";
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backgoundcolor: "green";
+  padding: "20px 10px";
+  margin: "0px auto";
+`;
 
 const Button = styled.button`
-    margin: 10px auto;
-    font-size: 1.2rem;
-    padding: 2px 10px;
-`
+  margin: 10px auto;
+  font-size: 1.2rem;
+  padding: 2px 10px;
+`;
 
 const Label = styled.label`
   font-size: 1.5rem;
@@ -42,20 +41,19 @@ const Label = styled.label`
   width: 100%;
   display: flex;
   justify-content: center;
-`
+`;
 const Input = styled.input`
-    width: 60%;
-`
+  width: 60%;
+`;
 
 const initialFormValues = {
-  username: "",
-  email: "",
+  name: "",
   password: "",
+  email: "",
 };
 
 const initialFormErrors = {
-  username: "",
-  email: "",
+  name: "",
   password: "",
 };
 
@@ -110,12 +108,12 @@ export default function SignupForm() {
     evt.preventDefault();
 
     const newUser = {
-      username: formValues.username,
       email: formValues.email,
       password: formValues.password,
+      username: formValues.name,
     };
     axiosWithAuth()
-      .post("https://med-cabinet-build-week.herokuapp.com/api/auth/register", newUser)
+      .post("api/register", newUser)
       .then((res) => {
         window.localStorage.setItem("token", res.data.token);
         history.push("/");
@@ -130,26 +128,25 @@ export default function SignupForm() {
     <div>
       <form className="form2 container" onSubmit={onSubmit}>
         <div className="errors">
-          <div>{formErrors.username}</div>
-          <div>{formErrors.email}</div>
+          <div>{formErrors.name}</div>
           <div>{formErrors.password}</div>
         </div>
 
         <DivFormGroup>
           <DivLabel>
             <Label>
-              Username&nbsp;
+              Name&nbsp;
               <Input
-                value={formValues.username}
+                value={formValues.name}
                 onChange={onInputChange}
-                name="username"
+                name="name"
                 type="text"
               />
             </Label>
           </DivLabel>
           <DivLabel>
             <Label>
-              Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Email&nbsp;
               <Input
                 value={formValues.email}
                 onChange={onInputChange}
@@ -170,9 +167,7 @@ export default function SignupForm() {
             </Label>
           </DivLabel>
           <DivButton>
-            <Button disabled={disabled} >
-              Submit
-            </Button>
+            <Button disabled={disabled}>Submit</Button>
           </DivButton>
         </DivFormGroup>
       </form>

@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
     headers: {
       authorization: token,
     },
-    baseURL: "https://med-cabinet-build-week.herokuapp.com/",
+    baseURL: "https://bw-med-cabinet-backend.herokuapp.com/",
   });
 };
