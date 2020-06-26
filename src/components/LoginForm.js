@@ -6,6 +6,8 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { ToastProvider, useToasts } from 'react-toast-notifications'
+import { useAlert } from 'react-alert'
 
 const I = styled.i`
   padding: 0px 5px;
@@ -57,117 +59,144 @@ const Input = styled.input`
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const initialFormValues = {
-  name: "",
-  password: "",
+    name: "",
+    password: "",
 };
 
 const initialFormErrors = {
-  name: "",
-  password: "",
+    name: "",
+    password: "",
 };
 
-export default function LoginForm() {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(false);
-  const [passwordShown, setPasswordShown] = useState(false);
+export function LoginFormInner() {
+    const [formValues, setFormValues] = useState(initialFormValues);
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
+    const [disabled, setDisabled] = useState(false);
+    const [passwordShown, setPasswordShown] = useState(false);
+    const { addToast } = useToasts();
+    const history = useHistory();
+    const alert = useAlert();
 
-  const history = useHistory();
 
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    const credentials = {
-      username: formValues.name,
-      password: formValues.password,
+    const onSubmit = (evt) => {
+        evt.preventDefault();
+        // const { error } = await dataPersistenceLayer(value)
+        const credentials = {
+            email: formValues.email,
+            password: formValues.password,
+        };
+        // postLogin(credentials);
+        axiosWithAuth()
+            .post(
+                "https://med-cabinet-build-week.herokuapp.com/api/auth/login",
+                credentials
+            )
+            .then((res) => {
+                window.localStorage.setItem("token", res.data.token);
+                history.push("/recommend");
+                //addToast('Saved Successfully', { appearance: 'success' })
+            })
+            .catch((err) => {
+                //addToast(err.message, { appearance: 'error' })
+                alert.show(err.message);
+            });
     };
-    // postLogin(credentials);
-    axiosWithAuth()
-      .post("api/login", credentials)
-      .then((res) => {
-        window.localStorage.setItem("token", res.data.token);
-        history.push("/recommend");
-      })
-      .catch((err) => {
-        console.log("Error");
-      });
-  };
 
-  const onInputChange = (evt) => {
-    const { name, value } = evt.target;
-    Yup.reach(loginFormSchema, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
+    const onInputChange = (evt) => {
+        const { name, value } = evt.target;
+        Yup.reach(loginFormSchema, name)
+            .validate(value)
+            .then(() => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: "",
+                });
+            })
+            .catch((err) => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: err.errors[0],
+                });
+            });
+        setFormValues({
+            ...formValues,
+            [name]: value,
         });
-      })
-      .catch((err) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0],
+    };
+
+
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
+
+
+    // const onSubmit = async value => {
+    //     const { error } = await dataPersistenceLayer(value)
+
+    //     if (error) {
+    //         addToast(error.message, { appearance: 'error' })
+    //     } else {
+    //         addToast('Saved Successfully', { appearance: 'success' })
+    //     }
+    // }
+
+    useEffect(() => {
+        loginFormSchema.isValid(formValues).then((valid) => {
+            setDisabled(!valid);
+            //console.log('valid:' + valid);
         });
-      });
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+    }, [formValues]);
 
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
-
-  useEffect(() => {
-    loginFormSchema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
-      //console.log('valid:' + valid);
-    });
-  }, [formValues]);
-
-  return (
+return (
     <div>
-      <form className="form container" onSubmit={onSubmit}>
-        <div className="errors">
-          <div>{formErrors.name}</div>
-          <div>{formErrors.password}</div>
-        </div>
+        <form className="form container" onSubmit={onSubmit}>
+            <div className="errors">
+                <div>{formErrors.email}</div>
+                <div>{formErrors.password}</div>
+            </div>
 
-        <DivFormGroup>
-          <DivLabel>
-            <Label>
-              Name:&nbsp;
-              <Input
-                value={formValues.name}
-                onChange={onInputChange}
-                name="name"
-                type="text"
-              />
-            </Label>
-          </DivLabel>
-          <DivLabel>
-            <Label>
-              Password:&nbsp;
-              <Input
-                value={formValues.password}
-                onChange={onInputChange}
-                name="password"
-                type={passwordShown ? "text" : "password"}
-              />
-              <I onClick={togglePasswordVisiblity}>{eye}</I>
-            </Label>
-          </DivLabel>
-          <DivButton>
-            <Button disabled={disabled}>Submit</Button>
-            <H4>
-              Not a user?
-              <Link className="links" to="/signup">
-                Signup
-              </Link>
-            </H4>
-          </DivButton>
-        </DivFormGroup>
-      </form>
+            <DivFormGroup>
+                <DivLabel>
+                    <Label>
+                        Name:&nbsp;
+                            <Input
+                            value={formValues.name}
+                            onChange={onInputChange}
+                            name="name"
+                            type="text"
+                        />
+                    </Label>
+                </DivLabel>
+                <DivLabel>
+                    <Label>
+                        Password:&nbsp;
+                            <Input
+                            value={formValues.password}
+                            onChange={onInputChange}
+                            name="password"
+                            type={passwordShown ? "text" : "password"}
+                        />
+                        <I onClick={togglePasswordVisiblity}>{eye}</I>
+                    </Label>
+                </DivLabel>
+                <DivButton>
+                    <Button disabled={disabled} >
+                        Submit
+                                </Button>
+                    <H4>
+                        Not a user?<Link className="links" to="/signup">Signup</Link>
+                    </H4>
+                </DivButton>
+            </DivFormGroup>
+        </form>
     </div>
   );
+}
+
+export default function LoginForm() {
+    return (
+        <ToastProvider>
+            <LoginFormInner />
+        </ToastProvider>
+    );
 }
