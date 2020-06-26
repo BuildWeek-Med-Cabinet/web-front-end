@@ -13,6 +13,15 @@ const Title = styled.div`
   color: white;
 `;
 
+const StyledCard = styled.div`
+  margin: 1%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  /* height: 60vh; */
+`;
+
 const defaultArray = [];
 
 export default function CannabisStrains({ items, updateItems }) {
@@ -22,7 +31,9 @@ export default function CannabisStrains({ items, updateItems }) {
 
   useEffect(() => {
     axiosWithAuth()
-      .get("https://med-cabinet-build-week.herokuapp.com/api/strains")
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://weed-data-bw.herokuapp.com/web_layout_strains"
+      )
       .then((res) => {
         const strainsModified = res.data.map((x) => {
           let y = { ...x };
@@ -59,7 +70,7 @@ export default function CannabisStrains({ items, updateItems }) {
       <TitleContainer>
         <Title>Here are some popular choices!</Title>
       </TitleContainer>
-      <div className="strains-container">
+      <StyledCard>
         {strains.map((x, i) => {
           return (
             <div>
@@ -70,7 +81,7 @@ export default function CannabisStrains({ items, updateItems }) {
             </div>
           );
         })}
-      </div>
+      </StyledCard>
     </div>
   );
 }

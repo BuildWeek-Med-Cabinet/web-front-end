@@ -1,79 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { settings } from "./store/actions";
 
 const Dashboard = (props) => {
+  const {
+    id,
+    userData,
+    fieldValues,
+    updated,
+    isDeleted,
+    updateInfo,
+    fillFields,
+    handleSettingsInput,
+    setUpdated,
+    deleteProfile,
+  } = props;
 
-    const history = useHistory();
-    const { id } = useParams();
-    const [user, setUser] = useState({
-        username: '',
-        email: '',
-        password: ''
-    });
+  if (isDeleted) {
+    window.location.reload();
+  }
 
-    const fetchUser = (id) => {
-    axiosWithAuth()
-        .get(`https://med-cabinet-build-week.herokuapp.com/api/auth/${id}`)
-        .then((res) => setUser(res.data))
-        .catch((err) => console.log(err.response));
+  //   const fetchUser = (id) => {
+  //     axiosWithAuth()
+  //       .get(`https://med-cabinet-build-week.herokuapp.com/api/auth/${id}`)
+  //       .then((res) => setUser(res.data))
+  //       .catch((err) => console.log(err.response));
+  //   };
+
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    deleteProfile(id);
+  };
+
+  useEffect(() => {
+    fillFields(userData);
+    return () => {
+      setUpdated(false);
     };
+  }, []);
 
-    useEffect(() => {
-        fetchUser(id);
-    }, [id]);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    updateInfo({ id, req: fieldValues });
+  };
 
-    const onChange = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        setUser({
-            ...user,
-            [name]: value
-        })
-    };
-
-    const onSubmit = e => {
-        e.preventDefault();
-
-        axiosWithAuth()
-        .put(`https://med-cabinet-build-week.herokuapp.com/api/auth/${id}`, user)
-        .then(res => {
-            history.push('/strains');
-        })
-        .catch(err => console.log(err))
-    }
-
-
-    return (
-        <div className='update-container'>
-            <form className='update-form' onSubmit={onSubmit}>
-                <h6 className='update'>Update User</h6>
-                <input
-                    className='update-input' 
-                    type='text'
-                    name='username'
-                    placeholder='username'
-                    onChange={onChange}
-                />
-                <input
-                    className='update-input' 
-                    type='email'
-                    name='email'
-                    placeholder='email'
-                    onChange={onChange}
-                />
-                <input
-                    className='update-input' 
-                    type='password'
-                    name='password'
-                    placeholder='password'
-                    onChange={onChange}
-                />
-                <button className='update-button'>Submit</button>
-            </form>         
+  return (
+    <div className="update-container">
+      <h1>Settings</h1>
+      <form onSubmit={submitHandler}>
+        <legend>Update User Info</legend>
+        <div>
+          <label>Username:&nbsp;</label>
+          <input
+            type="text"
+            name="username"
+            value={fieldValues.username}
+            onChange={handleSettingsInput}
+          />
         </div>
-    );
+        <div>
+          <label>Email:&nbsp;</label>
+          <input
+            type="text"
+            name="email"
+            value={fieldValues.email}
+            onChange={handleSettingsInput}
+          />
+        </div>
+        <div>
+          <input type="submit" value="Submit Changes" />
+        </div>
+        {updated && <div>User info updated successfully</div>}
+      </form>
+      <div>
+        <h3>Delete User Profile</h3>
+        <h4>(warning: this cannot be undone)</h4>
+        <button onClick={deleteHandler}>Delete</button>
+      </div>
+    </div>
+  );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    id: state.user.id,
+    userData: {
+      username: state.user.username,
+      email: state.user.email,
+    },
+    fieldValues: state.settings.fieldValues,
+    updated: state.settings.updated,
+    isDeleted: state.settings.isDeleted,
+  };
+};
+
+export default connect(mapStateToProps, {
+  updateInfo: settings.updateInfo,
+  fillFields: settings.fillFields,
+  handleSettingsInput: settings.handleSettingsInput,
+  setUpdated: settings.setUpdated,
+  deleteProfile: settings.deleteProfile,
+})(Dashboard);

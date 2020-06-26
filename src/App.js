@@ -52,9 +52,8 @@ function App(props) {
         </Nav>
       </Header>
       <Switch>
-        <Route exact path="/" render={() => (<Redirect to="/recommend" />)} />  
-        <Route path="/login" component={LoginForm} />
-        <Route path="/dashboard/:id" component={Dashboard} />
+        <Route exact path="/" component={LoginForm} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/strains" component={CannabisStrains} />
         <PrivateRoute path="/recommend" component={Recommend} />
