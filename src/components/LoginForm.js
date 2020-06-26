@@ -113,16 +113,7 @@ export default function LoginForm() {
             </label>
           </div>
           <div>
-            <button
-              style={{
-                backgoundColor: "green",
-                padding: "5px 10px",
-                margin: "10px 50%",
-              }}
-              disabled={disabled}
-            >
-              submit
-            </button>
+            <button disabled={disabled}>Submit</button>
           </div>
         </div>
       </form>

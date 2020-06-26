@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CannabisDetails from "./CannabisDetails";
+import CannabisCard from ".././Recommendations/CannabisCard";
 import { axiosWithAuth } from "../../utils";
 import styled from "styled-components";
 
@@ -14,13 +14,13 @@ const Title = styled.div`
 `;
 
 const defaultArray = [
-  {
-    strain: "",
-    type: "",
-    effect: "",
-    flavor: "",
-    description: "",
-  },
+  // {
+  //   strain: "",
+  //   type: "",
+  //   effect: "",
+  //   flavor: "",
+  //   description: "",
+  // },
 ];
 
 export default function CannabisStrains({ items, updateItems }) {
@@ -33,7 +33,15 @@ export default function CannabisStrains({ items, updateItems }) {
     axiosWithAuth()
       .get("https://med-cabinet-build-week.herokuapp.com/api/strains")
       .then((res) => {
-        setStrains(res.data);
+        const strainsModified = res.data.map((x) => {
+          let y = { ...x };
+          y["flavors"] = y["flavors"] ? y["flavors"] : [x.flavor];
+          y["effects"] = y["effects"] ? y["effects"] : [x.effect];
+          y["description"] = x.description ? x.description : "";
+          y["name"] = y["name"] ? y["name"] : x.strain;
+          return y;
+        });
+        setStrains(strainsModified);
       })
       .catch((err) => {
         console.log("Error", err);
@@ -63,10 +71,10 @@ export default function CannabisStrains({ items, updateItems }) {
         <Title>Here are some popular choices!</Title>
       </TitleContainer>
       <div className="strains-container">
-        {strains.map((x) => {
+        {strains.map((x, i) => {
           return (
             <div>
-              <CannabisDetails key={x.id} details={x} />
+              <CannabisCard key={i} details={x} />
               <button onClick={() => deleteStrain(x.id)}>
                 Delete this strain?
               </button>
