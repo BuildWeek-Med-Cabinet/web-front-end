@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Link, useParams } from "react-router-dom";
+import { Switch, Route, Link, useParams, Redirect } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import LoginPage from "./components/LoginPage";
 import Recommend from "./components/Recommendations";
@@ -44,7 +44,7 @@ function App(props) {
         </Nav>
       </Header>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/" render={() => (<Redirect to="/recommend" />)} />  
         <Route path="/login" component={LoginForm} />
         <Route path="/dashboard/:id" component={Dashboard} />
         <Route path="/signup" component={SignupForm} />

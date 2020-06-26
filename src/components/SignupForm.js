@@ -5,13 +5,46 @@ import { signupFormSchema } from "./formSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import styled from "styled-components";
 
+
+const DivFormGroup = styled.div`
+    width: 30%;
+    margin: 200px 35% 0;
+    padding: 0 10px;
+    border: 1px solid #173d53;
+    background-color: #25b3a7;
+    color: #173d53;
+    border-radius: 5px;
+`
+
 const DivLabel = styled.div`
     margin: 20px 0;
+    display: flex;
+    justify-content: center;
 `
 const DivButton = styled.div`
-    backgoundColor: "green",
-    padding: "5px 10px",
-    margin: "10px 50%"
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backgoundColor: "green";
+    padding: "20px 10px";
+    margin: "0px auto";
+`
+
+const Button = styled.button`
+    margin: 10px auto;
+    font-size: 1.2rem;
+    padding: 2px 10px;
+`
+
+const Label = styled.label`
+  font-size: 1.5rem;
+  margin: 0px auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+const Input = styled.input`
+    width: 60%;
 `
 
 const initialFormValues = {
@@ -102,46 +135,46 @@ export default function SignupForm() {
           <div>{formErrors.password}</div>
         </div>
 
-        <div className="form-group inputs">
+        <DivFormGroup>
           <DivLabel>
-            <label>
+            <Label>
               Username&nbsp;
-              <input
+              <Input
                 value={formValues.username}
                 onChange={onInputChange}
                 name="username"
                 type="text"
               />
-            </label>
+            </Label>
           </DivLabel>
           <DivLabel>
-            <label>
+            <Label>
               Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input
+              <Input
                 value={formValues.email}
                 onChange={onInputChange}
                 name="email"
                 type="email"
               />
-            </label>
+            </Label>
           </DivLabel>
           <DivLabel>
-            <label>
+            <Label>
               Password&nbsp;
-              <input
+              <Input
                 value={formValues.password}
                 onChange={onInputChange}
                 name="password"
                 type="password"
               />
-            </label>
+            </Label>
           </DivLabel>
           <DivButton>
-            <button disabled={disabled} >
+            <Button disabled={disabled} >
               Submit
-            </button>
+            </Button>
           </DivButton>
-        </div>
+        </DivFormGroup>
       </form>
     </div>
   );
