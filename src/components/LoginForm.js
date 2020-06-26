@@ -6,7 +6,6 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import SignupForm from './SignupForm';
 
 const I = styled.i`
     padding: 0px 5px;
