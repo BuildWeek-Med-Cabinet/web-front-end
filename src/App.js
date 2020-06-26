@@ -37,9 +37,9 @@ function App(props) {
           <Img src={logo} alt="logo" />
         </Link>
         <Nav>
-          <Link className="links" to="/preferences">
-            Preferences
-          </Link>
+          <a className="links" href="https://plant-pantry.netlify.app/">
+            Home
+          </a>
           <Link className="links" to={`/dashboard/${id}`}>
             Dashboard
           </Link>
