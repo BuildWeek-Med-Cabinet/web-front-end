@@ -26,8 +26,6 @@ const defaultArray = [];
 
 export default function CannabisStrains({ items, updateItems }) {
   const [strains, setStrains] = useState(defaultArray);
-  const [editing, setEditing] = useState(false);
-  const [strainToEdit, setStrainToEdit] = useState(defaultArray);
 
   useEffect(() => {
     axiosWithAuth()
@@ -50,21 +48,6 @@ export default function CannabisStrains({ items, updateItems }) {
       });
   }, []);
 
-  // const editStrains = (strain) => {
-  //   setEditing(true)
-  //   setStrainToEdit(strain)
-  // }
-
-  const deleteStrain = (id) => {
-    axiosWithAuth()
-      .delete(`https://med-cabinet-build-week.herokuapp.com/api/strains/${id}`)
-      .then((res) => {
-        console.log(res);
-        // updateItems(items.map((item) => (item.id === res.data.id ? res.data : item)))
-      })
-      .catch((err) => console.log(err));
-  };
-
   return (
     <div>
       <TitleContainer>
@@ -75,9 +58,6 @@ export default function CannabisStrains({ items, updateItems }) {
           return (
             <div>
               <CannabisCard key={i} details={x} />
-              <button onClick={() => deleteStrain(x.id)}>
-                Delete this strain?
-              </button>
             </div>
           );
         })}
